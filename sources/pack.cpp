@@ -27,12 +27,15 @@ int main()
 	std::cin >> You.last_name;
 	std::cout << std::endl << "Email:" << std::endl;
 	std::cin >> You.email.nickname;
-
+	std::string null_str, age_str;
 	std::cout << std::endl << "Age(optional):" << std::endl;
-	std::cin << You.age;
-
+	std::getline(std::cin, null_str);
+	std::getline(std::cin, age_str);
+	if(age_str.size() != 0) {
+        	You.age = std::stoi(age_str);
+	}
 	std::cout << std::endl << "Phone (optional):" << std::endl;
-	std::cin << You.phone;
+	std::getline(std::cin, You.phone);
 
 	int pos = You.email.nickname.find("@");
 	if (pos == -1)
