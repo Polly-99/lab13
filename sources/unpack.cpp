@@ -19,18 +19,16 @@ struct Person {
 int main()
 {
 	Person You;
-	std::fstream file ("Person.yml", std::fstream::in);
-	YAML::Parser parser(file);
-	YAML::Node doc;
-	parser.GetNextDocument(doc);
 
-	doc["first_name"] >> You.first_name;
-	doc["last_name"] >> You.last_name;
-	doc["nickname"] >> You.email.nickname;
-	doc["server"] >> You.email.server;
-	doc["age"] >> You.age;
-	doc["phone"] >> You.phone;
-        
+	YAML::Node doc = YAML::LoadFile("Person.yml");
+
+	You.first_name = doc["first_name"].as<std::string>();
+      	You.last_name = doc["last_name"].as<std::string>(); 
+      	You.email.nickname = doc["nickname"].as<std::string>();
+	You.email.server = doc["server"].as<std::string>();
+      	You.age = doc["age"].as<size_t>();
+	You.phone= doc["phone"].as<std::string>(); 
+
 	std::string email = You.email.nickname + "@" + You.email.server;
 	std::cout << "[Person]" << std::endl;
   	std::cout << "First name: " << You.first_name << std::endl;
